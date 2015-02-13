@@ -57,7 +57,13 @@ class Stepper():
 
 motor1 = Stepper(0)
 motor0 = Stepper(1)
+def setangle(angle):
+	motor0.setstep(angle)
+	motor1.setstep(angle)
+	print("I tried to set it to" + angle )
+	
 def getpos():
+	ser.write("givepos")
 	print(ser.read(10))
 	
 

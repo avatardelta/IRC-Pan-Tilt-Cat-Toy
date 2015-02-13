@@ -1,0 +1,14 @@
+Consider shifting arduino's command system to a polar coordinate system
+model input as:
+{ input type ; motor 1 ; motor 2 ; motor 3 } 
+input types: go to position ; set acceleration ; utility string
+-Allow multidimensional control with a single string
+
+Want a homing routine on device using local frame of reference
+want a homing routing for the device using arbitrary frame of reference
+	-Also using IMU reference data
+
+want 'wiggle' laser pattern
+
+joystick interface for manual control of arduino.
+Consider switch to direct i2c control , need to reference motorshield/accelstepper code.

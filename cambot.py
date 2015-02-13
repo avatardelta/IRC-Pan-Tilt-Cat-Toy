@@ -2,9 +2,74 @@ import willie
 import serial
 import time
 from time import sleep
+import os
+import sys
+
+from types import NoneType
+
 global ser
 ser = serial.Serial('/dev/ttyACM0', 115200)
+
 import laser as laser
+@willie.module.commands('beta')
+def homing(bot, trigger):
+	global pitch
+	global roll
+	global heading
+	ser.flushInput()
+	laser.getpos()
+	output = ser.read(40)
+	bot.say(output)
+@willie.module.commands('wwwddd')
+def updownline(bot, trigger):
+#	bot.say('aa')
+	laser.up()
+	sleep(1)
+	laser.up()
+	sleep(1)
+	laser.up()
+	sleep(1)
+	laser.down()
+	sleep(1)
+	laser.down()
+	sleep(1)
+	laser.down()
+
+	
+@willie.module.commands('inc')
+def increment(bot, trigger):
+	i = str(trigger.group(2))
+				
+#	except NoneType:
+#		bot.say('error')
+	bot.say(i)
+	if ( i == '1'):
+		bot.say('asdasdasdasdasd')
+
+@willie.module.commands('wasd')
+def lasersquare(bot, trigger):
+	laser.up()
+	sleep(1)
+	laser.right()
+	sleep(1)
+	laser.down()
+	sleep(1)
+	laser.left()
+	sleep(1)
+
+
+
+@willie.module.commands('fml')
+def harsh_reset(bot, trigger):
+	global ser
+	ser.close()	
+	os.system("sudo python /home/debian/.willie/modules/reset.py")
+	bot.say("indeed fml")
+	laser.idle()
+	ser = serial.Serial('/dev/ttyACM0', 115200)
+	ser.flushInput()
+	bot.say(ser.read(12))
+
 @willie.module.commands('bl')
 def blacks(bot, trigger):
 	bot.say('ack: bl engaged')
